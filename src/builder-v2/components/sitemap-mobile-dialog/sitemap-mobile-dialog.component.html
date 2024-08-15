@@ -1,0 +1,68 @@
+<div class="sitemap-mobile" [ngClass]="{'opened': !!showMagicLinkInfo}">
+  <div class="sitemap-mobile__closed"
+       *ngIf="!showMagicLinkInfo"
+       (click)="showMagicLinkInfo = true">
+    <div>
+      <i class="db-icon db-icon-ds-ai-generate"></i>
+      <p>Customize your sitemap to generate<br/> a website tailored to your modifications.</p>
+    </div>
+    <i class="db-icon db-icon-ds-arrow"></i>
+  </div>
+  <div class="sitemap-mobile__wrapper"
+       (click)="showMagicLinkInfo = false"
+       *ngIf="!!showMagicLinkInfo"></div>
+  <div class="sitemap-mobile__opened" *ngIf="!!showMagicLinkInfo">
+    <img class="sitemap-mobile__remove-icon"
+         (click)="showMagicLinkInfo = false"
+         alt="close-icon"
+         src="assets/images/icons/close-gray-transparent.svg">
+    <div>
+      <div class="sitemap-mobile__header">
+        <h1>
+          <i class="db-icon db-icon-ds-ai-generate"></i>
+          <span>Sitemap modification available only on Desktop</span>
+        </h1>
+        <p class="mt20">Copy and open the magic link below using Desktop<br/> browser and continue your flow from the same place</p>
+        <div class="ds-input-wrap mt16">
+          <i class="db-icon db-icon-ds-ai-generate"></i>
+          <input type="text"
+                 [ngxClipboard]="inputUsername" (cbOnSuccess)="copyMagicLink()" (click)="copyMagicLink()"
+                 #inputUsername
+                 [value]="magicLinkUrl"
+                 readonly
+                 class="ds-input black">
+
+          <a [ngxClipboard]="inputUsername" (cbOnSuccess)="isCopiedHostNames = true" (click)="isCopiedHostNames = true"
+             (onTooltipHide)="isCopiedHostNames = false"
+             class="db-icon db-icon-ds-copy" dsTooltipSize="small" dsTooltipPosition="top"
+             dsTooltipColor="black"
+             [dsTooltip]="'<b>' + ((isCopiedHostNames ? 'text_copied' : 'text_copy') | dbText) +'</b>'">
+          </a>
+
+        </div>
+        <p class="create-website mt30 mb30"
+           [ngClass]="{'disabled': !!generationStarted}"
+           (click)="startGeneration.emit()">I want to create my website based<br/> on the current sitemap</p>
+      </div>
+      <!--<div class="sitemap-mobile__divider"><span>or</span></div>
+      <div class="sitemap-mobile__content">
+        <div>
+          <p>Let us sent the link to your mail</p>
+        </div>
+        <div class="ds-input-wrap mt16">
+          <input type="text" formControlName="firstName"
+                 class="ds-input-black"
+                 [placeholder]="'text_createProfileFirstName' | dbText">
+        </div>
+        <div class="db-buttons mt30">
+          <a class="ds-btn ds-btn-l ds-btn-blue">
+            <span *ngIf="!loading" >Send Me a Magic Link</span>
+            <db-loading-circular-spinner *ngIf="loading"></db-loading-circular-spinner>
+          </a>
+
+          <p class="create-website mt60 mb30">I want to create my website based<br/> on the current sitemap</p>
+        </div>
+      </div>-->
+    </div>
+  </div>
+</div>

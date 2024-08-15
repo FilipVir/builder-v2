@@ -1,0 +1,118 @@
+@import 'font';
+@import "palette";
+
+.section-templates-container {
+  background: $white;
+  box-shadow: 0 4px 20px #00000026;
+
+  border-radius: 8px;
+  padding: 16px 4px 0 16px;
+  width: 320px;
+  box-sizing: border-box;
+  max-height: 476px;
+  overflow-y: auto;
+
+  .section-templates-title {
+    @include font(12px, 800, 18px);
+    margin-bottom: 10px;
+  }
+
+  .templates-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 8px;
+
+    .section-template {
+      &:last-child {
+        margin-bottom: 16px;
+      }
+
+      &:first-child {
+        margin-bottom: 16px;
+        position: relative;
+
+        &:after {
+          content: '';
+          height: 1px;
+          width: 100%;
+          background: $eggshell;
+          bottom: -16px;
+          right: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+      }
+
+      border: 1px solid #EAEAEA;
+      width: 288px;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      padding: 12px;
+      gap: 12px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $black;
+
+        .section-template-action {
+          background: $light-blue;
+
+          span {
+            color: $purple-blue;
+
+            &.db-icon-ds-sharp-plus{
+              &:before {
+                color: $purple-blue;
+              }
+            }
+          }
+        }
+      }
+
+      .section-template-image {
+        width: 36px;
+        height: 36px;
+        background: #f5f5f5;
+        border-radius: 3px;
+      }
+
+      .section-template-info {
+        width: 188px;
+
+        .section-template-name {
+          @include font(12px, 600, 18px);
+        }
+
+        .section-template-desc {
+          @include font(12px, 400, 18px);
+        }
+      }
+
+      .section-template-action {
+        align-self: center;
+        border-radius: 40px;
+        background: $grams-hair;
+        height: 18px;
+        width: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        span {
+          font-size: 6.4px;
+          &.db-icon-ds-sharp-plus{
+            &:before {
+              color: $black;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+}

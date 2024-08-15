@@ -1,0 +1,59 @@
+@import 'palette';
+
+:host {
+  &.right {
+    .ds-btn-purple-blue {
+      right: 0;
+    }
+  }
+}
+
+.add-page-btn-container {
+  position: relative;
+
+  .add-page-tooltip-container {
+    position: absolute;
+    right: 54px;
+    top: 0;
+    z-index: 20;
+
+    &.from-right {
+      right: unset;
+      left: 145px;
+    }
+  }
+
+  .ds-btn-purple-blue {
+    position: absolute;
+    top: 0;
+    width: 135px;
+    height: 30px;
+    padding: 8px 29px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+
+    .add-text {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    span {
+      font-weight: 400;
+      font-size: 14px;
+    }
+
+    &.disabled-btn {
+      background: #9496F5;
+      color: rgba($white, 0.8);
+      cursor: auto;
+    }
+
+    &:not(.disabled-btn) {
+      &:hover {
+        background: $purple-blue;
+      }
+    }
+
+  }
+}

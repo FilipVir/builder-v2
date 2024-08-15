@@ -1,0 +1,39 @@
+@import "palette";
+@import "font";
+@import "flex";
+@import "responsive";
+
+:host {
+  .builder-wrapper {
+    height: 100%;
+    overflow: hidden;
+    div {
+      height: 100%;
+      width: 100%;
+
+      @include screen-mobile {
+        width: 100%;
+      }
+    }
+  }
+}
+.flex-align {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.builder-v2-main-container {
+  height: 100%;
+  width: 100%;
+  background: $light-blue;
+  padding: 8px 10px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+::ng-deep{
+  .generation-backdrop{
+    z-index: 99999999;
+  }
+}

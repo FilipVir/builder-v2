@@ -1,0 +1,17 @@
+.sitemap-mobile__divider {
+  position: relative;
+  width: 156px;
+  margin: 0 auto 35px;
+  height: 1px;
+  background: #FFFFFF26;
+
+  span {
+    position: absolute;
+    left: 60px;
+    top: -10px;
+    padding: 0 10px;
+    color: $white;
+    background-color: $black;
+    @include font(14px, 600, 22px);
+  }
+}

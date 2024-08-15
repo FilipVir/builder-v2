@@ -1,0 +1,87 @@
+<div class="page-body-container"
+     (dbClickOutside)="resetSelection()">
+    <db-builder-page-section
+      *ngIf="staticSections[0]"
+      (isEdit)="isEdit = $event"
+      [section]="staticSections[0]"
+      [showPlus]="false"
+      [canAddSection]="draggableSections.length < sectionsLimit"
+      (onAddSection)="onAddSection(staticSections[0], 0)"
+      [static]="true">
+      <db-section-templates
+        [class.prime]="selectedSection?.id === staticSections[0].id"
+        templates
+        [secondary]="true"
+        [index]="0"
+        (sectionTemplatesOpenedChange)="openTemplatesForSection = null"
+        [templates]="sectionTemplates"
+        (sectionOutlineChange)="pageOutlineChange($event)"
+        *ngIf="openTemplatesForSection === staticSections[0].id">
+      </db-section-templates>
+    </db-builder-page-section>
+  <db-add-section-btn *ngIf="!draggableSections.length && !loading"
+                      (onAddSection)="onAddSection(staticSections[0], 0)">
+  </db-add-section-btn>
+  <div [dragulaModel]="draggableSections"
+       *ngIf="draggableSections.length"
+       class="draggable-sections"
+       (dragulaModelChange)="onStructureChange($event)"
+       [dragula]="page.id.toString()">
+    @for (section of draggableSections; track section.id; let i = $index, count = $count) {
+      <div class="page-section">
+        <db-builder-page-section
+          dbClassChangeObserver
+          (classChanged)="elementClassChanged()"
+          [section]="section"
+          [selected]="selectedSection?.id === section.id"
+          (isEdit)="isEdit = $event"
+          [isDragging]="isDragging"
+          [canAddSection]="count < sectionsLimit"
+          [loading]="loading"
+          (valueChange)="sectionValueChanged($event, i)"
+          (onGenerate)="onGenerate(i, $event)"
+          (contextmenu)="rightClick($event, section, i)"
+          (click)="selectSection(section, i)"
+          (onAddSection)="onAddSection(section, i)">
+
+          <db-section-templates
+            templates
+            [class.prime]="selectedSection?.id === section.id"
+            [secondary]="true"
+            [index]="i+1"
+            (sectionTemplatesOpenedChange)="openTemplatesForSection = null"
+            [templates]="sectionTemplates"
+            (sectionOutlineChange)="pageOutlineChange($event)"
+            *ngIf="openTemplatesForSection === section.id">
+          </db-section-templates>
+          <db-section-options
+            tools
+            *ngIf="openTemplatesForSection !== i"
+            [limitPassed]="count === sectionsLimit"
+            (dbClickOutside)="onCloseRightClick()"
+            [activeOption]="showActions? 'edit':null"
+            [section]="section"
+            [sectionLoading]="sectionLoading"
+            (onGenerate)="onGenerate(i, $event)"
+            (delete)="removeSection(i)"
+            (duplicate)="duplicateSection(i)"
+            (addSection)="addSection(i+$event)"
+          ></db-section-options>
+        </db-builder-page-section>
+        <db-builder-page-section
+          *ngIf="temprorarySection && temprorarySection?.index === (i + 1)"
+          [section]="temprorarySection">
+        </db-builder-page-section>
+      </div>
+    }
+  </div>
+  <db-builder-page-section [section]="staticSections[1]"
+                           (isEdit)="isEdit = $event"
+                           [showPlus]="false"
+                           *ngIf="staticSections[1]"
+                           [selected]="selectedSection?.id === staticSections[1].id"
+                           (click)="selectSection(staticSections[1])"
+                           [static]="true">
+  </db-builder-page-section>
+  <db-sceleton-loading *ngIf="loading"></db-sceleton-loading>
+</div>

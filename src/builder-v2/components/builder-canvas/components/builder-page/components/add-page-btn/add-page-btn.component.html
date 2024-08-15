@@ -1,0 +1,17 @@
+<div class="add-page-btn-container">
+  <div class="ds-btn-purple-blue ds-btn-l"
+       [class.disabled-btn]="disabled"
+       [dsTooltip]="!disabled?'': ('text_limitAddPage'|dbText:{count:5})"
+       [dsTooltipColor]="'black'"
+       [dsTooltipSize]="'m'"
+       dsTooltipPosition="top"
+       (click)="onAddPage()">
+    <span class="db-icon db-icon-ds-sharp-plus mr8"></span>
+    <span class="add-text">Add Page</span>
+  </div>
+  <div class="add-page-tooltip-container"
+       [class.from-right]="openRight"
+       (click)="$event.stopPropagation()">
+    <ng-content></ng-content>
+  </div>
+</div>

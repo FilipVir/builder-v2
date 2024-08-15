@@ -1,0 +1,22 @@
+<div class="page-title">
+  <div class="page-title-container">
+    <i class="db-icon db-icon-ds-my-sites-new"></i>
+    <span>{{page.title}}</span>
+  </div>
+
+  @if(!disabledLoadingSteps.includes(builderHistoryService.tourStep|async)){
+  <db-sections-loading class="mr8" [loading]="loading" (loadingEnded)="loadingEnded = true">
+  </db-sections-loading>
+  @if(loadingEnded && addTemplateSteps.includes(builderHistoryService.tourStep|async)){
+  <div class="ds-btn-purple-blue ds-btn-l"
+       [class.disabled]="!(sectionsInteractionsService.canAddSection|async) || generating"
+       [dsTooltip]="(sectionsInteractionsService.canAddSection|async)?'Add new sections':('text_limitAddSection'|dbText: {count:12})"
+       [dsTooltipColor]="'black'"
+       [dsTooltipSize]="(sectionsInteractionsService.canAddSection|async)?'m':'medium'"
+       dsTooltipPosition="top"
+       (click)="openTemplates()">
+    <span class="db-icon db-icon-ds-sharp-plus"></span>
+  </div>
+  }
+  }
+</div>

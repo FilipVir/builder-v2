@@ -1,0 +1,38 @@
+@import "palette";
+@import "font";
+
+.generation-options-container {
+  background: $black;
+  width: 260px;
+  padding: 11px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px #00000026;
+  display: flex;
+  flex-direction: column;
+
+  .generation-option {
+    @include font(12px, 400, 18px);
+    padding: 8px 16px;
+    color: $white;
+    display: flex;
+    gap: 8px;
+    opacity: .5;
+
+    i {
+      font-size: 18px;
+    }
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &:not(.disabled) {
+      cursor: pointer;
+      opacity: 1;
+
+      &:hover {
+        background: #FFFFFF1A;
+      }
+    }
+  }
+}

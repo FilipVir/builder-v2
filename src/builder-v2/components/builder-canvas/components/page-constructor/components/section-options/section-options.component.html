@@ -1,0 +1,31 @@
+<div class="section-options-container"
+     (dbClickOutside)="onOutsideClick()"
+     (contextmenu)="$event.stopPropagation()">
+  <div class="section-option-item"
+       [dsTooltip]="hideTooltip?'':'Ask AI'"
+       [dsTooltipColor]="'black'"
+       [dsTooltipSize]="'m'"
+       [dsTooltipPosition]="'right'"
+       (click)="hideTooltip=true; activeOption = 'ai'">
+    <img src="assets/images/icons/enhance_with_ai_active.svg" alt="generate">
+  </div>
+  <div class="section-option-item"
+       [dsTooltip]="hideTooltip?'':'Options'"
+       [dsTooltipColor]="'black'"
+       [dsTooltipSize]="'m'"
+       [dsTooltipPosition]="'right'"
+       (click)="hideTooltip=true; activeOption = 'edit'">
+    <i class="db-icon db-icon-ds-more-horizontal"></i>
+  </div>
+  <db-generation-options *ngIf="activeOption === 'ai'"
+                         [disableAll]="sectionLoading"
+                         (onGenerate)="activeOption = null;onGenerate.emit($event)"
+                         [options]="options">
+  </db-generation-options>
+  <db-section-action-tooltip *ngIf="activeOption === 'edit'"
+                             [limitPassed]="limitPassed"
+                             (delete)="delete.emit()"
+                             (duplicate)="duplicate.emit()"
+                             (addSection)="addSection.emit($event)">
+  </db-section-action-tooltip>
+</div>

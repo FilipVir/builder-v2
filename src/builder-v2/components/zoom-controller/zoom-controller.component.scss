@@ -1,0 +1,67 @@
+@import "font";
+@import "palette";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.zoom-controller-container {
+  background: $white;
+  padding: 4px;
+  box-sizing: border-box;
+  height: 42px;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  db-zoom-tooltip {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10px)
+  }
+
+
+  .controller {
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    span {
+      font-size: 12px;
+      color: $black;
+      opacity: .2;
+    }
+
+    cursor: pointer;
+
+    &:hover {
+      background: $baby-purple;
+
+      span {
+        opacity: 1;
+        color: $purple-blue;
+      }
+    }
+  }
+
+  .zoom-level {
+    @include font(12px, 700, 18px);
+    letter-spacing: 0.1px;
+    color: $black;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px 4px;
+    border-radius: 6px;
+
+    &:hover {
+      background: $baby-purple;
+      opacity: 1;
+      color: $purple-blue;
+    }
+  }
+}

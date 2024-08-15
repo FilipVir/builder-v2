@@ -1,0 +1,27 @@
+<div class="builder-canvas-outer-container">
+  <section class="builder-canvas-container"
+           id="draggable">
+    <div class="main-page-container">
+      <db-page-constructor
+        [sectionTemplates]="sectionTemplates"
+        [popupMode]="popupMode"
+        [uniqueId]="uniqueIdValue"
+        [user]="user"
+        (openMagicLink)="openMagicLink.emit($event)">
+      </db-page-constructor>
+    </div>
+    <div class="secondary-pages-container"
+         [class.unchangable]="isMobile"
+         *ngIf="pageMeta && sectionsLoaded$|async">
+      <db-secondary-pages [pageMeta]="pageMeta"
+                          [class.invisible]="(tourStep|async) === tourSteps.PAGE_BUILDER"
+                          [class.disabled]="(builderHistoryService.tourStep|async) !== tourSteps.END"
+                          [sectionTemplates]="sectionTemplates">
+      </db-secondary-pages>
+      <div class="cover"
+           *ngIf="(tourStep|async) === tourSteps.PAGE_BUILDER">
+      </div>
+    </div>
+  </section>
+</div>
+

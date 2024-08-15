@@ -1,0 +1,19 @@
+<div *ngIf="hasError && !section.loading"
+     class="error-message">
+  <div class="suggest-title"
+       *ngIf="!section.section_title">
+    Title is required.
+    <span class="db-link-black" (click)="onGenerate.emit('title')">
+                Get a suggestion from AI
+              </span>
+    <i class="db-icon db-icon-ds-ai-generate"></i>
+  </div>
+  <div class="suggest-description"
+       *ngIf="!section.section_description && section.section_title">
+    Add details for better results.
+    <span class="db-link-black" (click)="onGenerate.emit( 'description')">
+                Use AI
+              </span>
+    <i class="db-icon db-icon-ds-ai-generate"></i>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@import "palette";
+
+.empty-secondary-pages {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+
+  .action-container {
+    margin: 0 50px;
+  }
+
+  .line {
+    width: 600px;
+    height: 1px;
+    background: $black;
+  }
+}
+
+::ng-deep {
+  .action-container {
+    .add-page-btn-container {
+      .ds-btn-purple-blue {
+        position: unset !important;
+      }
+    }
+  }
+}

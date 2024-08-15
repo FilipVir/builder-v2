@@ -1,0 +1,35 @@
+<div class="zoom-controller-container" (click)="$event.stopPropagation()">
+  <div (click)="updateValue(zoomLevel - zoomStep)"
+       [dsTooltip]="'Zoom out'"
+       dsTooltipSize="m"
+       dsTooltipColor="black"
+       dsTooltipPosition="top"
+       dsTooltipFont="semibold"
+       class="controller">
+    <span class="db-icon db-icon-minus"></span>
+  </div>
+  <div class="zoom-level"
+       dsTooltip="Zoom"
+       dsTooltipSize="m"
+       dsTooltipColor="black"
+       dsTooltipPosition="top"
+       dsTooltipFont="semibold"
+       (click)="tooltipOpened = !tooltipOpened">
+    {{zoomLevel}}%
+  </div>
+  <div (click)="updateValue(zoomLevel + zoomStep)"
+       [dsTooltip]="'Zoom in'"
+       dsTooltipSize="m"
+       dsTooltipColor="black"
+       dsTooltipPosition="top"
+       dsTooltipFont="semibold"
+       class="controller">
+    <span class="db-icon db-icon-plus"></span>
+  </div>
+  <db-zoom-tooltip *ngIf="tooltipOpened"
+                   (close)="tooltipOpened = !tooltipOpened"
+                   (zoomToFit)="triggersService.fitToScreen.next()"
+                   (zoomByStep)="updateValue(zoomLevel + (zoomStep * $event))"
+                   (changeZoom)="updateValue($event)">
+  </db-zoom-tooltip>
+</div>

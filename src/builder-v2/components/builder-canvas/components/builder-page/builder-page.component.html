@@ -1,0 +1,30 @@
+<section class="builder-page-container">
+  <div class="page-content"
+       [class.selected]="selected"
+       [class.edit-mode]="pageEditMode">
+    <db-builder-page-title [page]="page"
+                           (dbClickOutside)="clickOutside()"
+                           (selectPage)="onSelectPage()"
+                           [selected]="selected"
+                           [pageEditData]="pageEditData"
+                           (cancelEdit)="cancelPageEdit($event)"
+                           (regeneratePage)="regeneratePage()"
+                           (onDeletePage)="showEditTooltip=false;onDeletePage.emit()"
+                           (onPageEdit)="onPageEdit($event)"
+                           (pageEditMode)="pageEditMode = $event"
+                           [loading]="loading">
+    </db-builder-page-title>
+    <db-builder-page-body [page]="page"
+                          [needRegeneration]="needRegeneration"
+                          [class.disabled]="pageEditData.loading"
+                          [enhanceObservable]="enhanceResponse"
+                          (sectionsListChanged)="onSectionsListChange($event)"
+                          (sectionTypeChange)="sectionTypeChange.emit($event)"
+                          (enhance)="enhanceSection($event)"
+                          [sectionTemplates]="sectionTemplates"
+                          (sectionSelected)="resetTitleEdit()"
+                          (loadingChanged)="loading = $event"
+                          [pageWithSections]="pageWithSections">
+    </db-builder-page-body>
+  </div>
+</section>

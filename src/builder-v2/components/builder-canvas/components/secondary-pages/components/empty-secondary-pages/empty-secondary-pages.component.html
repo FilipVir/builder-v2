@@ -1,0 +1,11 @@
+<section class="empty-secondary-pages">
+  <div class="line"></div>
+  <div class="action-container">
+    <db-add-page-btn (addPage)="showAddPageTooltip = true">
+      <db-add-page-tooltip (addPage)="showAddPageTooltip=false; onAddPage.emit($event)"
+                           (close)="showAddPageTooltip=false"
+                           *ngIf="showAddPageTooltip"></db-add-page-tooltip>
+    </db-add-page-btn>
+  </div>
+  <div class="line"></div>
+</section>

@@ -1,0 +1,76 @@
+<div class="page-title page-handle"
+     (click)="selectPage.emit()"
+     [class.selected]="selected"
+     [class.edit-mode]="editMode">
+  <div class="page-title-container page-handle"
+       [class.page-loading]="loading">
+    <i class="db-icon db-icon-ds-document page-handle"></i>
+    <div class="title-input page-handle"
+         (click)="editMode && $event.stopPropagation()"
+         [class.disable]="iconMode === 'loading'">
+      <div [attr.contenteditable]="editMode"
+           class="page-handle"
+           (dbClickOutside)="resetTitle()"
+           (click)="selected && !editMode && onClickEditIcon(title, $event)"
+           (keydown)="titleKeydown($event)"
+           #title>
+        {{page.title}}
+      </div>
+      <div class="title-edit-icon-container"
+           (click)="$event.stopPropagation()">
+        @switch (iconMode) {
+        @case ('loading') {
+        <db-loading-circular-spinner [newMode]="true"
+                                     class="mr7"
+                                     color="new-dark"
+                                     size="xxs">
+        </db-loading-circular-spinner>
+        }
+        @case ('checkmark') {
+        <i class="db-icon db-icon-ds-checkmark-small"
+           (click)="$event.stopPropagation(); $event.preventDefault(); saveEdit(title.innerText)">
+        </i>
+        }
+        @default {
+        <i class="db-icon db-icon-ds-edit-website"
+           (click)="onClickEditIcon(title, $event)">
+        </i>
+        }
+        }
+      </div>
+    </div>
+    <db-change-page-type-tooltip
+      (regenerate)="showPageTypeChangeTooltip = false; regeneratePage.emit()"
+      (cancel)="showPageTypeChangeTooltip = false; editMode=false; cancelEdit.emit(title.innerText)"
+      *ngIf="showPageTypeChangeTooltip">
+    </db-change-page-type-tooltip>
+  </div>
+
+  @if(!hideActions){
+  <db-sections-loading class="mr8"
+  [hideTooltip]="true"
+                       [loading]="loading"
+                       (loadingEnded)="loadingEnded = true">
+  </db-sections-loading>
+  @if(loadingEnded){
+  <div class="edit-action-container">
+    <div class="ds-btn-purple-blue ds-btn-l"
+         [class.disable]="iconMode === 'loading'"
+         [class.disabled]="!(sectionsInteractionsService.canAddSection|async) || generating"
+         (click)="onClickMore($event)">
+      <span class="db-icon db-icon-ds-more-horizontal"></span>
+    </div>
+    <div class="edit-tooltip"
+         *ngIf="showEditTooltip">
+      <db-edit-page-tooltip
+        (renamePage)="showEditTooltip = false; clickedEdit = true; onClickEditIcon(title)"
+        (deletePage)="showEditTooltip = false; onDeletePage.emit()"
+        (addPage)="showEditTooltip = false; onAddPage.emit()"
+        (close)="showEditTooltip = false">
+      </db-edit-page-tooltip>
+    </div>
+  </div>
+
+  }
+  }
+</div>

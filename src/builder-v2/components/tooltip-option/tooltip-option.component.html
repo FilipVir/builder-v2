@@ -1,0 +1,13 @@
+<div class="tools-container">
+  <div class="tool"
+       *ngFor="let option of options">
+    <div (click)="option.action()"
+         [class.disabled]="(!(sectionInteractions.canAddSection | async)|| limitPassed) && option.canDisable">
+      <span class="title">{{ option.title }}</span>
+      <div class="shortcut-container" *ngIf="option.icons[system].length">
+        <i *ngFor="let icon of option.icons[system]" [class]="'db-icon ' + icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+

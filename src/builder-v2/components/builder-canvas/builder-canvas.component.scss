@@ -1,0 +1,59 @@
+@import "palette";
+@import "font";
+
+.builder-canvas-outer-container {
+  position: relative;
+
+  .builder-canvas-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+
+    .main-page-container {
+      .down-connector {
+        height: 2rem;
+        width: 1px;
+        background-color: $black;
+        margin: auto;
+      }
+    }
+
+    .secondary-pages-container {
+      position: relative;
+
+      &.unchangable {
+        pointer-events: none;
+      }
+
+      db-secondary-pages {
+        &.invisible {
+          opacity: 0;
+        }
+
+        &.disabled {
+          pointer-events: none;
+        }
+      }
+
+      .down-connector {
+        height: 2rem;
+        width: 1px;
+        background-color: $black;
+        margin: auto;
+      }
+
+      .cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(3px);
+        z-index: 12;
+      }
+    }
+  }
+}
+

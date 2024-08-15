@@ -1,0 +1,36 @@
+@import "palette";
+@import "font";
+
+.add-page-tooltip-container {
+  background: $black;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+
+  .add-page-input-container {
+    display: flex;
+    flex-direction: column;
+
+
+    .title-label {
+      @include font(12px, 600, 18px);
+      color: $white;
+      margin-bottom: 6px;
+
+      span {
+        color: #D41125;
+      }
+    }
+
+    .ds-input-black {
+      background: #FFFFFF1A;
+      border-color: #FFFFFF1A;
+      color: $white;
+    }
+  }
+
+  .ds-btn-purple-blue {
+    width: 100%;
+  }
+
+}

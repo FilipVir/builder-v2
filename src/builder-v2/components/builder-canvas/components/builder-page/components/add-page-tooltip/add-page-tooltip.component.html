@@ -1,0 +1,15 @@
+<form class="add-page-tooltip-container"
+      (keyup.enter)="proceed(nameControl.value)"
+      (dbClickOutside)="close.emit()">
+  <div class="add-page-input-container">
+    <div class="title-label">
+      Add new page title <span>*</span>
+    </div>
+    <input type="text" [formControl]="nameControl" class="ds-input-black" placeholder="">
+  </div>
+  <button class="ds-btn-purple-blue mt30"
+          [ngClass]="{'ds-btn-disabled' : nameControl.invalid}"
+          (click)="proceed(nameControl.value)">
+    Proceed
+  </button>
+</form>

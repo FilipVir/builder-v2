@@ -1,0 +1,40 @@
+@import "palette";
+
+.builder-page-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  .page-content {
+    position: relative;
+
+    &.edit-mode, &.selected {
+      outline: 1px solid $purple-blue;
+      border-radius: 5px;
+    }
+
+    db-section-templates {
+      position: absolute;
+      top: 0;
+      left: 301px;
+      z-index: 15;
+    }
+
+    db-builder-page-body {
+      &.disabled {
+        pointer-events: none;
+      }
+    }
+
+    &.selected {
+      box-shadow: 0 4px 20px #00000026;
+      border-radius: 6px;
+    }
+  }
+}

@@ -1,0 +1,103 @@
+@import "palette";
+@import "font";
+
+.page-section-input-container {
+  &.static {
+    &:not(.selected):not(:hover) {
+      background: transparent;
+      border: unset;
+
+      .page-section-description {
+        opacity: .3;
+      }
+    }
+
+    border-radius: 6px;
+
+    .page-section-title {
+      pointer-events: none;
+    }
+
+    .drag-section-btn, .add-section-below-btn {
+      visibility: hidden;
+    }
+  }
+
+  .page-section-title {
+    @include font(12px, 800, 20px);
+    color: $black;
+    border: none;
+    padding: 2px 3px;
+    cursor: default;
+  }
+
+  .page-section-description {
+    @include font(12px, 400, 18px);
+    color: $black;
+    border: none;
+    resize: none;
+    width: 100%;
+    padding: 2px 3px;
+    cursor: default;
+  }
+
+  [contenteditable]:focus, .tour-focus {
+    outline: 1px solid #CCCCCC;
+    border-radius: 4px;
+    cursor: auto;
+  }
+    .tour-focus span {
+      background-color: rgba($purple-blue, 0.1);
+    }
+
+
+  [contenteditable].empty:focus {
+    &:before {
+      display: none;
+    }
+  }
+
+  [contenteditable].empty:before {
+    content: attr(data-placeholder);
+    color: $black;
+    opacity: 0.3;
+    cursor: text;
+    display: block;
+    @include font(12px, 400, 18px);
+  }
+
+  [contenteditable].page-section-title.empty:before {
+    font-weight: 700;
+  }
+
+  .page-section-description, .page-section-title {
+    span::selection {
+     background-color: rgba($purple-blue, 0.1);
+    }
+
+    &:empty:before {
+      content: attr(data-placeholder);
+      color: $black;
+      opacity: 0.3;
+      @include font(12px, 400, 18px);
+    }
+  }
+
+  .page-section-title {
+    &:empty:before {
+      font-weight: 700;
+    }
+  }
+}
+
+::ng-deep {
+  .page-section-item {
+    &:hover {
+      .page-section-input-container{
+        .page-section-description {
+          opacity: 1 !important;
+        }
+      }
+    }
+  }
+}

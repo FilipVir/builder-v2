@@ -1,0 +1,25 @@
+@import "font";
+
+.add-section-btn-container {
+  background: #FFFFFF1A;
+  border: 1px solid #EAEAEA;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 23px 0;
+  cursor: pointer;
+
+  &:hover {
+    background: #F5F5F7;
+  }
+
+  i {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+
+  span {
+    @include font(12px, 600, 18px)
+  }
+}

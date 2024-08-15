@@ -1,0 +1,26 @@
+<ng-container *ngIf="!hideAll">
+  <db-loading-circular-spinner [dsTooltip]="hideTooltip?null:'Section generation is currently underway.'"
+                               hostClass="default"
+                               [dsTooltipColor]="'black'"
+                               dsTooltipPosition="top"
+                               dsTooltipMode="timer"
+                               [dsTooltipTopPxs]="11"
+                               dsTooltipSize="m"
+                               [newMode]="true"
+                               *ngIf="loading"
+                               color="new-dark"
+                               size="xxs">
+  </db-loading-circular-spinner>
+  <i class="db-icon db-icon-ds-checkmark"
+     [dsTooltip]="hideTooltip?null:'Done'"
+     hostClass="default"
+     [dsTooltipColor]="'black'"
+     dsTooltipSize="m"
+     dsTooltipPosition="top"
+     dsTooltipMode="timer"
+     [dsTooltipTopPxs]="11"
+     @fadeOut
+     *ngIf="!loading"
+  ></i>
+</ng-container>
+

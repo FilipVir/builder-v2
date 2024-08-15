@@ -1,0 +1,9 @@
+<section class="canvas"
+         [class.dragging]="isDragging"
+         [class.drag-mode]="mouseDragMode"
+         (mouseup)="onMouseUp($event)"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event)"
+         (wheel)="onWheel($event)">
+  <ng-content></ng-content>
+</section>

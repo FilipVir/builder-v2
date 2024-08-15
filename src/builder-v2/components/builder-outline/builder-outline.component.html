@@ -1,0 +1,42 @@
+<db-draggable-canvas (canvasScale)="scaleInPercentage = $event"
+                     [scaleLevel]="scaleInPercentage"
+                     [isMobile]="isMobile"
+                     (smoothTransition)="isSmoothTransition = $event">
+  <section class="builder-outline" #projected>
+    <div class="sceleton">
+      <db-builder-header (switchCustomization)="showCustomization = !showCustomization"
+                         [popupMode]="popupMode"
+                         [user]="user"
+                         (onGenerate)="onGenerate.emit()"
+                         [showCover]="[tourEnum.CUSTOMIZER, tourEnum.GENERATION].includes(tourStep)"
+                         [style.z-index]="[tourEnum.CUSTOMIZER, tourEnum.GENERATION].includes(tourStep) ? accentZIndex : 11">
+      </db-builder-header>
+      <db-builder-canvas
+        [user]="user"
+        [isMobile]="isMobile"
+        (openMagicLink)="openMagicLink.emit($event)"
+        [uniqueId]="uniqueId"
+        [pageMeta]="outline?.pages_meta"
+        [class.smooth-transition]="isSmoothTransition"
+        [popupMode]="popupMode"
+        [style.z-index]="tourEnum.PAGE_BUILDER === tourStep ? accentZIndex : 10">
+      </db-builder-canvas>
+      <div class="floating-buttons {{showCustomization}}"
+           *ngIf="!isMobile"
+           dbStopPinchEvent
+           [class.side]="showCustomization || tourEnum.CUSTOMIZER === tourStep">
+        <db-zoom-controller
+          [minZoomLevel]="canvasZoomService.minZoom|async"
+          [maxZoomLevel]="canvasZoomService.maxZoom|async"
+          [(zoomLevel)]="scaleInPercentage">
+        </db-zoom-controller>
+      </div>
+      <div class="mouse-navigation-label" *ngIf="!isMobile">
+        <i class="db-icon db-icon-ds-mouse-border"></i><span><strong>Spacebar + Left-click</strong> to drag and move around</span>
+      </div>
+    </div>
+    <div class="cover"
+         *ngIf="coverSteps.includes(tourStep) || (builderInteractionsService.buildLoading|async)">
+    </div>
+  </section>
+</db-draggable-canvas>

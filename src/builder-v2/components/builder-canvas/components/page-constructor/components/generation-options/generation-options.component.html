@@ -1,0 +1,10 @@
+<div class="generation-options-container">
+  @for(option of options; track (option.title + option.disabled + disableAll)){
+  <div class="generation-option"
+  (click)="onGenerate.emit(option.action)"
+  [class.disabled]="option.disabled || disableAll">
+    <i [class]="option.icon"></i>
+    <div class="generation-option-text">{{option.title}}</div>
+  </div>
+  }
+</div>

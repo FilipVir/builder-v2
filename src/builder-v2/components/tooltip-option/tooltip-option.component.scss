@@ -1,0 +1,59 @@
+@import "palette";
+@import "font";
+
+.tools-container {
+  display: flex;
+  flex-direction: column;
+
+  .tool {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      color: white;
+      padding: 5px 16px;
+      cursor: pointer;
+      align-items: center;
+      transition: opacity 0.3s ease, background 0.3s;
+
+      .title {
+        @include font(12px, 400, 18px);
+      }
+
+      &.disabled{
+        color: rgba(white, 0.5);
+        pointer-events: none;
+      }
+
+      &:not(.disabled) {
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      &.not-hovered {
+        opacity: 0.6;
+      }
+
+      .shortcut-container {
+        box-sizing: border-box;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+
+        i {
+          color: rgba(255, 255, 255, 1);
+          opacity: 0.4;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

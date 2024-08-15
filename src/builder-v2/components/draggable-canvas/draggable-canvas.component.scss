@@ -1,0 +1,14 @@
+.canvas {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+
+  &.drag-mode {
+    cursor: grab;
+  }
+
+  &.dragging {
+    cursor: grabbing;
+  }
+}

@@ -1,0 +1,160 @@
+<section class="page-constructor-container"
+         id="page-constructor">
+  <div class="page-container"
+       [class.selected]="tourEnum.PAGE_BUILDER === (builderHistoryService.tourStep|async)">
+    <db-page-title [loading]="loading"
+                   [generating]="sectionLoading"
+                   (openSectionTemplates)="openSectionTemplates()">
+    </db-page-title>
+    <div class="page-body"
+         [class.disabled]="disabledSteps.includes(builderHistoryService.tourStep|async) || !!isMobile"
+         (dbClickOutside)="resetSelection()">
+      <div *ngIf="staticSections[0]"
+           [class.selected]="staticSections[0].id === selectedSection?.id"
+           (click)="selectSection(staticSections[0], 0)"
+           class="page-section-item static">
+        <db-section-templates
+          [index]="0"
+          (sectionTemplatesOpenedChange)="templatesForSection = null"
+          [templates]="sectionTemplates"
+          *ngIf="templatesForSection === -1">
+        </db-section-templates>
+        <db-page-section [static]="true"
+                         (isEdit)="isEdit = $event"
+                         (valueChange)="sectionValueChange($event, staticSections[0], 0, true)"
+                         [selected]="staticSections[0].id === selectedSection?.id"
+                         [titleControl]="staticSections[0].title_control"
+                         [descriptionControl]="staticSections[0].description_control"
+                         [section]="staticSections[0]">
+        </db-page-section>
+        <div class="add-section-below-btn"
+             [class.disabled]="!(_sectionsInteractionsService.canAddSection|async)"
+             [dsTooltip]="(_sectionsInteractionsService.canAddSection|async) ? '' : ('text_limitAddSection'|dbText: {count:12})"
+             dsTooltipSize="medium"
+             dsTooltipPosition="bottom"
+             dsTooltipColor="black"
+             (click)="$event.stopPropagation();onClickAddSection(0, staticSections[0])">
+          <i class="db-icon db-icon-ds-sharp-plus"></i>
+        </div>
+      </div>
+      <div [dragulaModel]="draggableSections"
+           *ngIf="draggableSections.length"
+           class="draggable-sections"
+           (dragulaModelChange)="onStructureChange($event)"
+           [dragula]="'sections'">
+        <ng-container *ngFor="let section of draggableSections; let i = index">
+          <div [class.tempo]="section.is_tempo"
+               [id]="section.id"
+               [class.section-loading]="section.loading"
+               [class.selected]="section.id === selectedSection?.id"
+               (contextmenu)="rightClick($event, section, i)"
+               dbClassChangeObserver
+               (classChanged)="dragClassChanged()"
+               (click)="selectSection(section, i)"
+               class="page-section-item" [ngClass]="{
+             'generating':section.loading,
+             'dragging': isDragging,
+             'with-error': (sectionErrors[i] || sectionWarns[i]) && !section.loading,
+             'title-err': sectionErrors[i]
+             }">
+            <div>
+              <db-section-templates
+                [index]="i+1"
+                (sectionTemplatesOpenedChange)="templatesForSection = null"
+                [templates]="sectionTemplates"
+                *ngIf="templatesForSection === i ">
+              </db-section-templates>
+              <db-page-section
+                [id]="i"
+                [builderStep]="(builderHistoryService.tourStep|async) === tourEnum.PAGE_BUILDER"
+                [static]="false"
+                (isEdit)="onSectionEdit($event)"
+                [selected]="section.id === selectedSection?.id"
+                (valueChange)="sectionValueChange($event, section, i+1)"
+                [titleControl]="section.title_control"
+                [descriptionControl]="section.description_control"
+                [section]="section">
+              </db-page-section>
+              <db-section-options
+                *ngIf="templatesForSection !== i && (builderHistoryService.tourStep|async) !== tourEnum.PAGE_BUILDER"
+                (dbClickOutside)="onCloseRightClick()"
+                [activeOption]="showActions? 'edit':null"
+                [section]="section"
+                [sectionLoading]="sectionLoading"
+                (onGenerate)="onGenerate(i, $event)"
+                (delete)="removeSection(i)"
+                (duplicate)="duplicateSection(i)"
+                (addSection)="addSection(i+$event)"
+              ></db-section-options>
+              <div class="drag-section-btn handle">
+                <i class="db-icon db-icon-ds-drag handle"></i>
+              </div>
+              <div class="add-section-below-btn"
+                   [class.disabled]="!(_sectionsInteractionsService.canAddSection|async) || loading"
+                   [dsTooltip]="(_sectionsInteractionsService.canAddSection|async) ? '' : ('text_limitAddSection'|dbText: {count:12})"
+                   dsTooltipSize="medium"
+                   dsTooltipPosition="bottom"
+                   dsTooltipColor="black"
+                   (click)="$event.stopPropagation();onClickAddSection(i)">
+                <i class="db-icon db-icon-ds-sharp-plus"></i>
+              </div>
+            </div>
+            <db-section-notifs
+              [hasError]="sectionErrors[i] || sectionWarns[i]"
+              [section]="section"
+              (onGenerate)="onGenerate(i, $event)">
+            </db-section-notifs>
+            <div *ngIf="section.loading"
+                 class="section-loading-container">
+              <img src="assets/images/icons/enhance_with_ai_active.svg" alt="generate">
+              Generating
+              <div class="loader">
+                <span>...</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="tempoSection && tempoSection?.index === (i+1)"
+               class="tempo page-section-item">
+            <div>
+              <db-page-section
+                [section]="tempoSection">
+              </db-page-section>
+            </div>
+            <db-section-notifs
+              [hasError]="sectionErrors[i] || sectionWarns[i]"
+              [section]="section"
+              (onGenerate)="onGenerate(i, $event)">
+            </db-section-notifs>
+            <div *ngIf="section.loading"
+                 class="section-loading-container">
+              <img src="assets/images/icons/enhance_with_ai_active.svg" alt="generate">
+              Generating
+              <div class="loader">
+                <span>...</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <db-sceleton-loading *ngIf="loading"></db-sceleton-loading>
+      <div *ngIf="staticSections[1]"
+           [class.selected]="staticSections[1].id === selectedSection?.id"
+           (click)="selectSection(staticSections[1], 1)"
+           class="page-section-item static">
+        <db-page-section [static]="true"
+                         (isEdit)="isEdit = $event"
+                         (valueChange)="sectionValueChange($event, staticSections[1], pageSections.length-1, true)"
+                         [selected]="staticSections[1].id === selectedSection?.id"
+                         [titleControl]="staticSections[1].title_control"
+                         [descriptionControl]="staticSections[1].description_control"
+                         [section]="staticSections[1]">
+        </db-page-section>
+      </div>
+    </div>
+    <db-section-templates
+      [templates]="sectionTemplates"
+      [(sectionTemplatesOpened)]="sectionTemplatesOpened"
+      *ngIf="sectionTemplatesOpened">
+    </db-section-templates>
+  </div>
+</section>

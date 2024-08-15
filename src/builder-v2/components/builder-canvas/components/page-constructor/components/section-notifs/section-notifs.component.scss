@@ -1,0 +1,39 @@
+@import "palette";
+@import "font";
+
+.error-message {
+  .db-link-black {
+    cursor: pointer;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 18px !important;
+    padding: 0 !important;
+    margin: 0 4px;
+  }
+
+  .suggest-title {
+    color: $red;
+    font-style: italic;
+    @include font(12px, 400, 18px);
+    display: flex;
+    align-items: center;
+
+    .db-icon {
+      color: $black;
+      font-size: 14px;
+    }
+  }
+
+  .suggest-description {
+
+    color: $purple-blue;
+    font-style: italic;
+    @include font(12px, 400, 18px);
+    display: flex;
+    align-items: center;
+
+    .db-icon {
+      color: $black;
+    }
+  }
+}

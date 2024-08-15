@@ -1,0 +1,13 @@
+<section class="change-page-type-tooltip-container">
+  <div class="change-page-type-title">
+    You are about to change the page type
+  </div>
+  <div class="change-page-type-description">
+    Do you want to regenerate the outline based on the new title? <br>
+    If not, ensure the title matches the sections below and vice versa.
+  </div>
+  <div class="change-page-type-actions">
+    <button class="ds-btn-white" (click)="cancel.emit()">Leave as is</button>
+    <button class="ds-btn-purple-blue" (click)="regenerate.emit()">Regenerate</button>
+  </div>
+</section>

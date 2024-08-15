@@ -1,0 +1,23 @@
+<div class="page-section-input-container"
+     [class.selected]="selected"
+     [class.static]="static">
+  <div contenteditable
+       [disabled]="!selected"
+       [formControl]="titleForm"
+       (paste)="onPaste($event)"
+       (blur)="onBlur()"
+       (focus)="selectText()"
+       [attr.data-placeholder]="titleForm.value ? null: 'Enter the section title'"
+       class="noneSelectable page-section-title">
+  </div>
+  <div contenteditable
+       [disabled]="!selected"
+       (paste)="onPaste($event)"
+       (blur)="onBlur()"
+       (focus)="selectText()"
+       (click)="$event.preventDefault()"
+       [formControl]="descriptionForm"
+       [attr.data-placeholder]="descriptionForm.value? null: 'Describe this section'"
+       class="noneSelectable page-section-description">
+  </div>
+</div>

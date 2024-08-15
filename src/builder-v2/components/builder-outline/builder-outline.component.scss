@@ -1,0 +1,94 @@
+@import "palette";
+@import "flex";
+@import "font";
+
+.builder-outline {
+  height: 100%;
+  width: 100%;
+  background: $light-blue;
+  padding: 8px 10px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+
+  .sceleton {
+    position: absolute;
+    width: calc(100% - 30px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    db-builder-canvas {
+      position: absolute;
+      top: 75px;
+      //width: 100%;
+      &.smooth-transition {
+        transition: transform 0.2s ease;
+      }
+    }
+
+    db-builder-header {
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+
+    db-website-customizer {
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      top: 52px;
+      transform: translateX(150%);
+    }
+
+    .floating-buttons {
+      position: absolute;
+      z-index: 11;
+      top: calc(100vh - 60px);
+      right: 0;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      &.side {
+        right: 360px;
+        top: calc(100vh - 60px);
+      }
+    }
+
+    .mouse-navigation-label {
+      position: absolute;
+      z-index: 10;
+      top: calc(100vh - 60px);
+      left: 0;
+      border: 1px solid $eggshell;
+      border-radius: 8px;
+      padding: 10px 12px;
+      @include flex(flex, center, center, row);
+      gap: 10px;
+      background: rgba($white, 0.4);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+
+      i.db-icon-ds-mouse-border {
+        font-size: 14px;
+      }
+
+      span {
+        @include font(12px, 400, 18px);
+      }
+    }
+
+  }
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    z-index: 12;
+  }
+}

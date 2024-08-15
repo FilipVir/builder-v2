@@ -1,0 +1,17 @@
+.sitemap-mobile__header {
+
+  h1 {
+    @include font(22px, 700, 30px);
+    @include flex(flex, start, start, column);
+    gap: 10px;
+
+    .db-icon {
+      color: #3339F1;
+      font-size: 32px;
+    }
+  }
+
+  p {
+    @include font(12px, 400, 18px);
+  }
+}

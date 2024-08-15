@@ -1,0 +1,237 @@
+@import "palette";
+@import "font";
+
+.builder-header-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  .builder-header-navigation-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+
+    &.cover {
+      pointer-events: none;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(3px);
+
+      & + .builder-header-actions-container {
+        .customize-action-bnt {
+          outline: 2px solid $purple-blue;
+        }
+      }
+    }
+
+    .navigation-dropdown-container {
+      border: 1px solid $eggshell;
+      border-radius: 8px;
+      display: flex;
+      gap: 2px;
+      padding: 17px;
+      background: $white;
+      width: 40px;
+      height: 42px;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+
+      &.ds-disabled {
+        pointer-events: none;
+      }
+
+      .db-icon-logo-black {
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .db-icon-new-down-arrow {
+        font-size: 10px;
+      }
+    }
+
+    .navigation-action-container {
+      border: 1px solid $eggshell;
+      border-radius: 8px;
+      display: flex;
+      gap: 4px;
+      padding: 6px;
+      background: $white;
+
+      div {
+        border-radius: 6px;
+        background: $light-blue;
+        padding: 3px;
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:first-child {
+          i {
+            transform: rotateX(180deg) rotate(180deg);
+            display: block;
+          }
+        }
+
+        i {
+          color: #939394;
+          font-size: 24px;
+          pointer-events: none;
+
+          &.active {
+            color: $black;
+            cursor: pointer;
+            pointer-events: auto;
+          }
+
+        }
+      }
+    }
+
+    .navigation-sitemap-info {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      opacity: 54%;
+
+      .navigation-sitemap-info-text {
+        @include font(14px, 600, 20px);
+        color: $black;
+      }
+
+      i.db-icon-ds-sitemap {
+        font-size: 12px;
+        color: $black;
+      }
+    }
+  }
+
+  .builder-header-actions-container {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 0;
+
+
+    .customize-action-bnt {
+      width: 171px;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid $eggshell;
+
+      .separator {
+        height: 100%;
+        width: 1px;
+        background-color: rgba($black, 0.2);
+        margin: 0 8px;
+      }
+
+      i {
+        font-size: 18px;
+      }
+
+      span {
+        @include font(12px, 600, 18px);
+        letter-spacing: 0.1px;
+      }
+
+      &:hover {
+        outline: 1px solid $purple-blue;
+      }
+    }
+
+    .ds-btn-purple-blue {
+
+      &.disable-hover {
+        pointer-events: none;
+      }
+
+      &:hover {
+        opacity: 1;
+        background: #595EF2;
+
+        span {
+          opacity: 0.8;
+        }
+      }
+
+      &.ds-btn-disabled {
+        opacity: 1;
+        background: #9496F5;
+
+        span {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .ds-btn-white {
+      &:hover {
+        opacity: 1;
+        background: $white;
+
+        span, i {
+          opacity: 0.8;
+        }
+      }
+
+      &.ds-btn-disabled {
+        opacity: 1;
+        background: $white;
+
+        span, i {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .customization-done-btn {
+      width: 100px;
+      border: 2px solid $purple-blue;
+      box-sizing: border-box;
+
+      span {
+        @include font(12px, 600, 18px);
+        letter-spacing: 0.1px;
+      }
+    }
+
+    .modal-close-container {
+      display: flex;
+      height: 40px;
+
+      .separator {
+        width: 1px;
+        background-color: $eggshell;
+        height: 100%;
+        margin-right: 15px;
+      }
+
+      .modal-close-action {
+        background: $white;
+        border: 1px solid $eggshell;
+        border-radius: 6px;
+        padding: 9px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .modal-close-outside {
+          position: unset;
+          color: $black;
+          opacity: 0.2;
+        }
+
+        &:hover {
+          .modal-close-outside {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

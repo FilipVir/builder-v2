@@ -1,0 +1,63 @@
+<section class="builder-header-container">
+  <div class="builder-header-navigation-container" [class.cover]="showCover">
+    <div class="navigation-dropdown-container" [ngClass]="{'ds-disabled': popupMode}"
+         (click)="back()">
+      <i class="db-icon db-icon-logo-black"></i>
+    </div>
+    <div class="navigation-action-container" *ngIf="!isMobile">
+      <div [dsTooltip]="'Undo'"
+           (click)="changeState(builderHistoryService.canUndo, -1)"
+           dsTooltipSize="small"
+           dsTooltipPosition="bottom"
+           dsTooltipColor="black">
+        <i class="db-icon db-icon-ds-restore1"
+           [class.active]="(builderHistoryService.canUndo|async) && !(_builderSectionsInteractionsService.secondaryPageLoading|async)"></i>
+      </div>
+      <div [dsTooltip]="'Redo'"
+           (click)="changeState(builderHistoryService.canRedo, 1)"
+           dsTooltipSize="small"
+           dsTooltipPosition="bottom"
+           dsTooltipColor="black">
+        <i class="db-icon db-icon-ds-restore1"
+           [class.active]="(builderHistoryService.canRedo|async) && !(_builderSectionsInteractionsService.secondaryPageLoading|async)">
+        </i>
+      </div>
+    </div>
+    <div class="navigation-sitemap-info ml12" *ngIf="!isMobile">
+     <i class="db-icon db-icon-ds-sitemap"></i><span class="navigation-sitemap-info-text">{{ companyName }} sitemap</span>
+    </div>
+  </div>
+  <div class="builder-header-actions-container" dbStopPinchEvent>
+    <ng-container *ngIf="![tourEnum.GENERATION].includes(builderHistoryService.tourStep|async) && !isMobile">
+      <button class="ds-btn-white customize-action-bnt {{[tourEnum.END].includes(builderHistoryService.tourStep|async)}}"
+              [class.ds-btn-disabled]="disabledBtnSteps.includes(builderHistoryService.tourStep|async)"
+              *ngIf="!customizationOpened; else doneBtn"
+              (click)="customizeWebsite()">
+        <i class="db-icon db-icon-ds-edit-website"></i>
+        <div class="separator"></div>
+        <span>Customize Website</span>
+      </button>
+      <ng-template #doneBtn>
+        <button class="ds-btn-black customization-done-btn"
+                (click)="saveCustomization()">
+          <span>Done</span>
+        </button>
+      </ng-template>
+    </ng-container>
+    <button class="ds-btn-purple-blue"
+            [ngClass]="{'ds-btn-disabled' : disabledGenerateBtnSteps.includes(builderHistoryService.tourStep|async) || (isInvalid$|async) || !this.pageLoaded,
+            'disable-hover': tourEnum.GENERATION === (builderHistoryService.tourStep|async),
+            'ds-btn-l': !isMobile,
+            'ds-btn-medium-large tall': !!isMobile}"
+            (click)="generateWebsite()">
+      <i class="db-icon db-icon-ds-ai-generate"></i>
+      <span>Generate Your Website</span>
+    </button>
+    <div class="modal-close-container" *ngIf="popupMode">
+      <div class="separator"></div>
+      <div class="modal-close-action">
+        <i class="modal-close-outside db-icon db-icon-ds-close-bg"></i>
+      </div>
+    </div>
+  </div>
+</section>

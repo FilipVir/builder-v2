@@ -1,0 +1,20 @@
+@import "palette";
+
+.arcade-video span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background-color: $purple-blue;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  animation: ripple 1.2s infinite;
+}
+i.db-icon-ds-play {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  padding: 10px;
+  color: white;
+}

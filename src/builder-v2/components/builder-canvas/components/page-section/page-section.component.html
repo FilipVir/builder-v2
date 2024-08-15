@@ -1,0 +1,28 @@
+<div class="page-section-input-container"
+     [class.selected]="selected"
+     [class.static]="static">
+  <div [attr.contenteditable]="selected"
+       (paste)="onPaste($event)"
+       (focus)="isEdit.emit(true)"
+       (blur)="inputBlur()"
+       (click)="selectText($event)"
+       (input)="titleControl?.setValue($event.target?.textContent); titleControl?.markAsDirty()"
+       [attr.data-placeholder]="section.section_title ? null : 'Enter the section title'"
+       class="noneSelectable page-section-title"
+       [class.empty]="titleControl?.value === ''">
+   <span>{{title || section.section_title.trim()}}</span>
+  </div>
+
+  <div [attr.contenteditable]="selected"
+       [class.tour-focus]="selected && builderStep"
+       (focus)="isEdit.emit(true)"
+       (paste)="onPaste($event)"
+       (click)="selectText($event)"
+       (blur)="inputBlur()"
+       (input)="descriptionControl?.setValue($event.target?.textContent); descriptionControl?.markAsDirty()"
+       [attr.data-placeholder]="section.section_description? null: 'Describe this section'"
+       class="noneSelectable page-section-description"
+       [class.empty]="descriptionControl?.value === ''">
+    <span>{{section.section_description?.trim()}}</span>
+  </div>
+</div>

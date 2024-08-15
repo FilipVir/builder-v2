@@ -1,0 +1,10 @@
+@import "palette";
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba($purple-blue, 0.3), 0 0 0 0 rgba($purple-blue, 0.3), 0 0 0 7px rgba($purple-blue, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($purple-blue, 0.3), 0 0 0 7px rgba($purple-blue, 0.3), 0 0 0 17px rgba($purple-blue, 0);
+  }
+}

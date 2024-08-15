@@ -1,0 +1,17 @@
+@import "palette";
+@import "font";
+@import "flex";
+
+@import "./_styles/sitemap-mobile";
+@import "./_styles/sitemap-mobile__btns";
+@import "./_styles/sitemap-mobile__input-wrap";
+@import "./_styles/sitemap-mobile__header";
+@import "./_styles/sitemap-mobile__content";
+@import "./_styles/sitemap-mobile__divider";
+@import "./_styles/sitemap-mobile__opened";
+@import "./_styles/sitemap-mobile__closed";
+@import "./_styles/sitemap-mobile__wrapper";
+
+:host {
+
+}

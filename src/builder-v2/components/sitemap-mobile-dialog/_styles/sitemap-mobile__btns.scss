@@ -1,0 +1,21 @@
+.db-buttons {
+  .ds-btn {
+    width: 100%;
+  }
+
+  .create-website {
+    text-decoration: underline;
+    text-align: center;
+    @include font(12px, 400, 18px);
+  }
+}
+
+.create-website {
+  text-decoration: underline;
+  text-align: center;
+  @include font(12px, 400, 18px);
+
+  &.disabled {
+    pointer-events: none;
+  }
+}

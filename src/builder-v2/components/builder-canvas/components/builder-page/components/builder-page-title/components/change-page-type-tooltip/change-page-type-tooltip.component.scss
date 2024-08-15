@@ -1,0 +1,33 @@
+@import "palette";
+@import "font";
+
+.change-page-type-tooltip-container {
+  background: $black;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  color: $white;
+
+  .change-page-type-title {
+    @include font(14px, 600, 20px);
+    margin-bottom: 6px;
+  }
+
+  .change-page-type-description {
+    @include font(12px, 400, 18px);
+    margin-bottom: 20px;
+  }
+
+  .change-page-type-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      width: 100px;
+      font-weight: 600;
+      height: 30px;
+    }
+  }
+
+}

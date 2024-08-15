@@ -1,0 +1,26 @@
+<section class="section-templates-container"
+         dbStopPinchEvent
+         (contextmenu)="$event.stopPropagation()"
+         (click)="$event.stopPropagation()"
+         (dbClickOutside)="sectionTemplatesOpenedChange.emit(false)">
+  <div class="section-templates-title">
+    Add sections
+  </div>
+  <div class="templates-list-container">
+    <div class="section-template"
+         (click)="onTemplateSelect(template)"
+         (mouseover)="onMouseOver(template)"
+         (mouseout)="onMouseOut(template)"
+         *ngFor="let template of templates">
+      <img class="section-template-image"
+           [src]="'data:image/png;base64, ' + template.base64_image">
+      <div class="section-template-info">
+        <div class="section-template-name">{{template.ui_name}} section</div>
+        <div class="section-template-desc">{{template.description}}</div>
+      </div>
+      <div class="section-template-action">
+        <span class="db-icon db-icon-ds-sharp-plus"></span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<div class="page-section-item"
+     [class.tempo]="section.is_tempo"
+     [id]="section.id"
+     [class.section-loading]="section.loading"
+     [class.selected]="selected"
+     [ngClass]="{
+             'generating':section.loading,
+             'dragging':isDragging,
+             'with-error': (section.title_control.invalid || section.description_control.invalid) && !section.loading,
+             'title-err': section.title_control.invalid
+             }"
+     [class.static]="static">
+  <div class="db-section-templates">
+    <ng-content select="[templates]"></ng-content>
+  </div>
+  <div class="db-section-options"
+       [class.prime]="selected">
+    <ng-content select="[tools]"></ng-content>
+  </div>
+  <db-section-fields [descriptionForm]="section?.description_control"
+                     [selected]="selected"
+                     (isEdit)="isEdit.emit($event)"
+                     [static]="static"
+                     (valueChange)="sectionValueChange($event)"
+                     [titleForm]="section?.title_control">
+  </db-section-fields>
+  <div class="drag-section-btn handle">
+    <i class="db-icon db-icon-ds-drag handle"></i>
+  </div>
+  <div class="add-section-below-btn"
+       *ngIf="showPlus"
+       [class.disabled]="!canAddSection || loading"
+       [dsTooltip]="canAddSection ? '' : ('text_limitAddSection'|dbText : {count:3})"
+       dsTooltipSize="medium"
+       dsTooltipPosition="bottom"
+       dsTooltipColor="black"
+       (click)="$event.stopPropagation();onClickAddSection()">
+    <i class="db-icon db-icon-ds-sharp-plus"></i>
+  </div>
+  <db-section-notifs
+    [hasError]="(section.title_control.invalid || section.description_control.invalid)"
+    [section]="section"
+    (onGenerate)="onClickGenerate($event)">
+  </db-section-notifs>
+  <div *ngIf="section.loading"
+       class="section-loading-container">
+    <img src="assets/images/icons/enhance_with_ai_active.svg" alt="generate">
+    Generating
+    <div class="loader">
+      <span>...</span>
+    </div>
+  </div>
+</div>

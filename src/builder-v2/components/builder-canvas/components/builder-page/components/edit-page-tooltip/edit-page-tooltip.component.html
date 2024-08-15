@@ -1,0 +1,7 @@
+<div class="edit-page-tooltip-container"
+     (click)="$event.stopPropagation()"
+     (dbClickOutside)="opened && close.emit()">
+  <db-tooltip-option [options]="options.firstSection"></db-tooltip-option>
+  <div class="separator" *ngIf="options.secondSection.length"></div>
+  <db-tooltip-option [options]="options.secondSection"></db-tooltip-option>
+</div>

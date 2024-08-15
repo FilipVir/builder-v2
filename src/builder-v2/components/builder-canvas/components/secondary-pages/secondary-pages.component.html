@@ -1,0 +1,65 @@
+<div class="down-connector" [hidden]="!pageMeta?.length">
+  <db-add-page-btn (addPage)="addPageTooltipOpened = true"
+                   [disabled]="pageMeta?.length === pagesLimit">
+    <db-add-page-tooltip (addPage)="addPageTooltipOpened=false; addPage($event)"
+                         (close)="addPageTooltipOpened=false"
+                         *ngIf="addPageTooltipOpened"></db-add-page-tooltip>
+  </db-add-page-btn>
+</div>
+<div class="secondary-pages-list-container"
+     [dragulaModel]="pageMeta"
+     (dragulaModelChange)="onStructureChange($event)"
+     [dragula]="'secondaryPages'">
+  @for (page of pageMeta; track page.id;
+  let i = $index,
+  isLast = $last,
+  count = $count,
+  isFirst = $first) {
+  <div [id]="page.id" dbClassChangeObserver
+  (classChanged)="dragClassChanged()">
+    <div class="item-container">
+      <div class="src-editor-sitemap-pages__connectorUpwards">
+        <div
+          [class.src-editor-sitemap-pages__isFirst]="isFirst"
+          class="src-editor-sitemap-pages__connectorHorizLine"
+        ></div>
+        <div
+          class="src-editor-sitemap-pages__connectorCenterOnly"
+          *ngIf="(isFirst && isLast) || (!isFirst && !isLast)"
+        ></div>
+        <div
+          class="src-editor-sitemap-pages__connectorCenterFirst"
+          *ngIf="isFirst && pageMeta.length >= 2"
+        ></div>
+        <div
+          class="src-editor-sitemap-pages__connectorCenterLast"
+          *ngIf="isLast && pageMeta.length >= 2"
+        ></div>
+        <div
+          [class.src-editor-sitemap-pages__isLast]="isLast"
+          class="src-editor-sitemap-pages__connectorHorizLine"
+        ></div>
+      </div>
+      <db-builder-page [page]="page"
+                       [needRegeneration]="loadingPageIds === page.id"
+                       (onRegeneratePage)="regeneratePage($event)"
+                       (onSectionListChange)="onSectionListChange(i, $event, page.id)"
+                       (sectionTypeChange)="onSectionTypeChange(i, $event)"
+                       [selected]="selectedPageId === page.id"
+                       (selectPage)="selectPage($event)"
+                       (onPageChange)="onPageChange(i, $event)"
+                       [index]="i"
+                       [pagesCount]="count"
+                       (onAddPage)="addPage($event)"
+                       (onDeletePage)="deletePage(page.id)"
+                       [sectionTemplates]="sectionTemplates"
+                       [pageWithSections]="pagesWithSections[i]">
+      </db-builder-page>
+    </div>
+  </div>
+  }@empty{
+  <db-empty-secondary-pages (onAddPage)="addPage($event)">
+  </db-empty-secondary-pages>
+  }
+</div>
+

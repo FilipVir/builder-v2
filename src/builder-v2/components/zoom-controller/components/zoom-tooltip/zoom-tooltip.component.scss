@@ -1,0 +1,17 @@
+@import "font";
+@import "palette";
+
+.zoom-tooltip-container {
+  background: $black;
+  width: 200px;
+  padding: 17px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px #00000026;
+
+  .separator {
+    height: 1px;
+    margin: 15px 16px;
+    background: rgba(234, 234, 234, 0.2);
+  }
+
+}

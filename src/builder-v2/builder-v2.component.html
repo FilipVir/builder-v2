@@ -1,0 +1,22 @@
+<db-builder-outline [outline]="outline"
+                    (openMagicLink)="openMagicLink = true"
+                    [popupMode]="popupMode"
+                    [isMobile]="isMobile"
+                    [tourStep]="tourStep"
+                    [uniqueId]="uniqueId"
+                    (onGenerate)="generateWebsite()"
+                    [user]="user">
+</db-builder-outline>
+  <div *ngFor="let font of fontStyles; let i = index"
+       [style.visibility]="'hidden'">
+    <div [innerHTML]="font"></div>
+  </div>
+
+  <div *ngIf="!!isMobile && !user && !!showSiteMap">
+    <db-sitemap-mobile-dialog
+      (startGeneration)="this.generateWebsite()"
+      [generationStarted]="generationStarted"
+      [user]="user"
+      [openMagicLink]="openMagicLink">
+    </db-sitemap-mobile-dialog>
+  </div>
